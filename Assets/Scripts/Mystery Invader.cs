@@ -13,7 +13,7 @@ public class MysteryInvader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pickPoints();
+        PickPoints();
         // Debug.Log();
     }
 
@@ -31,7 +31,7 @@ public class MysteryInvader : MonoBehaviour
         
     }
 
-    void pickPoints()
+    void PickPoints()
     {
         int[] mysteryPoints = {25, 50, 100, 150, 200};
         int randomNum = Random.Range(0, mysteryPoints.Length-1);
@@ -42,14 +42,20 @@ public class MysteryInvader : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Bullet"))
         {
-            OnMysteryDied.Invoke(points);
             Destroy(gameObject);
+            Destroy(other.gameObject);
             GetComponent<Animator>().SetTrigger("Dead");
         }
     }
 
     public void MoveAcrossScreenComplete()
     {
+        Destroy(gameObject);
+    }
+
+    public void DeathAnimationComplete()
+    {
+        OnMysteryDied.Invoke(points);
         Destroy(gameObject);
     }
 

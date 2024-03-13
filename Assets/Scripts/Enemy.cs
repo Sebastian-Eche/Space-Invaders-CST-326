@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
         addingSpeed = addingSpeed + 0.1f;
         OnEnemyDied.Invoke(points, addingSpeed);
         GetComponent<Animator>().SetTrigger("Dead");
+        GetComponent<AudioSource>().Play();
       }
 
     }
